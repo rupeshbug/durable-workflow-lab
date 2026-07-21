@@ -1,6 +1,7 @@
+import "./lib/redis";
+import "./lib/queue";
 import { serve } from "@hono/node-server";
 import app from "./app";
-import "./lib/redis";
 
 serve(
   {
