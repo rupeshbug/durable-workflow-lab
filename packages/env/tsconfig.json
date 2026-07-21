@@ -1,0 +1,3 @@
+{
+  "extends": "@durable-workflow-lab/config/tsconfig.base.json"
+}

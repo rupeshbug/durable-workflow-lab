@@ -1,0 +1,27 @@
+{
+  "name": "durable-workflow-lab",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev:server": "turbo run dev -F server"
+  },
+  "dependencies": {
+    "@durable-workflow-lab/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@durable-workflow-lab/config": "workspace:*",
+    "@types/node": "catalog:",
+    "turbo": "^2.10.2",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.14.0"
+}
