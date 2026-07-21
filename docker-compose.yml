@@ -6,12 +6,22 @@ services:
     container_name: workflow-lab-redis
 
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
     command: redis-server --appendonly yes
 
     volumes:
       - redis-data:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: workflow-lab-redis-commander
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
 
 volumes:
   redis-data:
