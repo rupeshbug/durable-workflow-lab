@@ -1,5 +1,4 @@
-import "./lib/redis";
-import "./lib/queue";
+import "@durable-workflow-lab/bullmq";
 import { serve } from "@hono/node-server";
 import app from "./app";
 

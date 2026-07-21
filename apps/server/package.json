@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@durable-workflow-lab/env": "workspace:*",
+    "@durable-workflow-lab/bullmq": "workspace:*",
     "@hono/node-server": "^2.0.8",
     "bullmq": "^5.80.9",
     "dotenv": "catalog:",

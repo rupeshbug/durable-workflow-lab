@@ -1,5 +1,5 @@
 import { Worker } from "bullmq";
-import { redis } from "./lib/redis";
+import { redis } from "@durable-workflow-lab/bullmq";
 
 const worker = new Worker(
   "workflow",

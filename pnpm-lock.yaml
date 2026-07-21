@@ -48,6 +48,9 @@ importers:
 
   apps/server:
     dependencies:
+      '@durable-workflow-lab/bullmq':
+        specifier: workspace:*
+        version: link:../../packages/bullmq
       '@durable-workflow-lab/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -85,6 +88,15 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+
+  packages/bullmq:
+    dependencies:
+      bullmq:
+        specifier: ^5
+        version: 5.80.9
+      ioredis:
+        specifier: ^5
+        version: 5.11.1
 
   packages/config: {}
 

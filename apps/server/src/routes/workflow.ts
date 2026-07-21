@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { workflowQueue } from "../lib/queue";
+import { workflowQueue } from "@durable-workflow-lab/bullmq";
 
 export const workflowRouter = new Hono();
 
