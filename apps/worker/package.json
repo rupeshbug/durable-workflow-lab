@@ -1,0 +1,13 @@
+{
+  "name": "worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@durable-workflow-lab/bullmq": "workspace:*",
+    "bullmq": "^5.80.9",
+    "tsx": "^4.22.5"
+  }
+}
