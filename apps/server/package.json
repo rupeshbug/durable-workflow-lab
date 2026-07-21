@@ -12,8 +12,10 @@
   "dependencies": {
     "@durable-workflow-lab/env": "workspace:*",
     "@hono/node-server": "^2.0.8",
+    "bullmq": "^5.80.9",
     "dotenv": "catalog:",
     "hono": "^4.12.27",
+    "ioredis": "^5.11.1",
     "zod": "catalog:"
   },
   "devDependencies": {
