@@ -3,40 +3,51 @@ import {
   createWorkflow,
   getWorkflow,
   updateStep,
+  updateContext,
+  WorkflowContext,
 } from "./workflow-state";
 
-export type WorkflowStep = () => Promise<void>;
+export interface WorkflowExecutionContext {
+  workflowId: string;
+  context: WorkflowContext;
+}
+
+export type WorkflowStep = (ctx: WorkflowExecutionContext) => Promise<void>;
 
 export class WorkflowRunner {
   constructor(private readonly workflowId: string) {}
 
   async run(steps: WorkflowStep[]) {
-    // 1. Load workflow state
     let workflow = await getWorkflow(this.workflowId);
 
-    // 2. Create it if this is the first execution
-    if (!workflow.workflowId) {
+    if (!workflow) {
       await createWorkflow(this.workflowId);
       workflow = await getWorkflow(this.workflowId);
+
+      if (!workflow) {
+        throw new Error("Failed to create workflow");
+      }
     }
 
-    const currentStep = Number(workflow.currentStep);
+    const executionContext: WorkflowExecutionContext = {
+      workflowId: this.workflowId,
+      context: workflow.context,
+    };
 
     console.log(
-      `📍 Resuming workflow ${this.workflowId} from step ${currentStep + 1}`,
+      `Resuming workflow ${this.workflowId} from step ${workflow.currentStep + 1}`,
     );
 
-    // 3. Execute remaining steps
-    for (let i = currentStep; i < steps.length; i++) {
-      console.log(`▶️ Running Step ${i + 1}`);
+    for (let i = workflow.currentStep; i < steps.length; i++) {
+      console.log(`Running Step ${i + 1}`);
 
-      await steps[i]();
+      await steps[i](executionContext);
 
-      // 4. Save checkpoint
+      await updateContext(this.workflowId, executionContext.context);
+
       await updateStep(this.workflowId, i + 1);
     }
 
-    // 5. Mark workflow complete
     await completeWorkflow(this.workflowId);
 
     console.log("🎉 Workflow completed");
