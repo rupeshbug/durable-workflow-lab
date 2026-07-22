@@ -41,6 +41,7 @@ export async function getWorkflow(
 }
 
 export async function updateStep(workflowId: string, currentStep: number) {
+  // Redis Hash receives key and fields as strings, so we convert the currentStep to a string before storing it.
   await redis.hset(
     `workflow:${workflowId}`,
     "currentStep",
